@@ -168,12 +168,12 @@ const main = async () => {
   console.log("Contract deployed by:", owner.address);
 
   let waveCount;
-  waveCount = await waveContract.getTotalWaves();
+  waveCount = await wavePortal.getTotalWaves();
 
-  let waveTxn = await waveContract.wave();
+  let waveTxn = await wavePortal.wave();
   await waveTxn.wait();
 
-  waveCount = await waveContract.getTotalWaves();
+  waveCount = await wavePortal.getTotalWaves();
 };
 
 const runMain = async () => {
@@ -234,12 +234,12 @@ console.log("Contract deployed by:", owner.address);
 ```javascript
 // run.js
 let waveCount;
-waveCount = await waveContract.getTotalWaves();
+waveCount = await wavePortal.getTotalWaves();
 
-let waveTxn = await waveContract.wave();
+let waveTxn = await wavePortal.wave();
 await waveTxn.wait();
 
-waveCount = await waveContract.getTotalWaves();
+waveCount = await wavePortal.getTotalWaves();
 ```
 
 ここでは、通常のAPIと同じように、関数を手動で呼び出しています。1行ずつ見ていきましょう。
@@ -247,20 +247,20 @@ waveCount = await waveContract.getTotalWaves();
 ```javascript
 // run.js
 let waveCount;
-waveCount = await waveContract.getTotalWaves();
+waveCount = await wavePortal.getTotalWaves();
 ```
 
 まず、`let waveCount`でローカル変数を宣言します。
 
-次に、`waveContract.getTotalWaves()`で`WavePortal.sol`に記載された`getTotalWaves()`を呼び出し、既存の「👋（wave）」の総数を取得します。
+次に、`wavePortal.getTotalWaves()`で`WavePortal.sol`に記載された`getTotalWaves()`を呼び出し、既存の「👋（wave）」の総数を取得します。
 
 ```javascript
 // run.js
-let waveTxn = await waveContract.wave();
+let waveTxn = await wavePortal.wave();
 await waveTxn.wait();
 ```
 
-`let waveTxn = await waveContract.wave()`では、ユーザーが新しい「👋（wave）」を送ったことを承認するまで、コントラクトからの応答をフロントエンドが待機するよう設定しています。
+`let waveTxn = await wavePortal.wave()`では、ユーザーが新しい「👋（wave）」を送ったことを承認するまで、コントラクトからの応答をフロントエンドが待機するよう設定しています。
 
 `.wave()`関数ではブロックチェーン上の書き込みが発生するので、ガス代がかかります。よって、ユーザーは取引を確認する必要があります。
 
@@ -272,7 +272,7 @@ MetaMaskを使っていて、取引を承認するために数秒手間どった
 
 ```javascript
 // run.js
-waveCount = await waveContract.getTotalWaves();
+waveCount = await wavePortal.getTotalWaves();
 ```
 
 ここで最後に、`waveCount`をもう一度取得して、`+1`されたかどうかを確認します。
@@ -329,17 +329,17 @@ const main = async () => {
   console.log("Contract deployed by:", owner.address);
 
   let waveCount;
-  waveCount = await waveContract.getTotalWaves();
+  waveCount = await wavePortal.getTotalWaves();
 
-  let waveTxn = await waveContract.wave();
+  let waveTxn = await wavePortal.wave();
   await waveTxn.wait();
 
-  waveCount = await waveContract.getTotalWaves();
+  waveCount = await wavePortal.getTotalWaves();
 
-  waveTxn = await waveContract.connect(randomPerson).wave();
+  waveTxn = await wavePortal.connect(randomPerson).wave();
   await waveTxn.wait();
 
-  waveCount = await waveContract.getTotalWaves();
+  waveCount = await wavePortal.getTotalWaves();
 };
 
 const runMain = async () => {
@@ -359,9 +359,9 @@ runMain();
 
 ```javascript
 // run.js
-waveTxn = await waveContract.connect(randomPerson).wave();
+waveTxn = await wavePortal.connect(randomPerson).wave();
 await waveTxn.wait();
-waveCount = await waveContract.getTotalWaves();
+waveCount = await wavePortal.getTotalWaves();
 ```
 
 このレッスンの序盤で、`run.js`の中で`randomPerson`のアドレスを取得したのを覚えていますか？
@@ -371,7 +371,7 @@ waveCount = await waveContract.getTotalWaves();
 
 ```javascript
 // run.js
-waveTxn = await waveContract.connect(randomPerson).wave();
+waveTxn = await wavePortal.connect(randomPerson).wave();
 ```
 
 ここでは、`.connect(randomPerson)`を用いて、ほかのユーザーがあなたに「👋（wave）」を送った状態をシミュレーションしています。
@@ -379,7 +379,7 @@ waveTxn = await waveContract.connect(randomPerson).wave();
 ```javascript
 // run.js
 await waveTxn.wait();
-waveCount = await waveContract.getTotalWaves();
+waveCount = await wavePortal.getTotalWaves();
 ```
 
 ここでは、あなたが自分自身に「👋（wave）」を送り、その承認を持ってから　`waveCount`の値を更新したように、`randomPerson`の挙動を確認してから`waveCount`の更新(`+1`)を行っています。
